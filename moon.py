@@ -19,21 +19,15 @@ MONTH_QUERY_URL = "https://dgsx.cqvie.edu.cn/prod-api/internship_pending/monthre
 MONTH_SUBMIT_URL = "https://dgsx.cqvie.edu.cn/prod-api/internship_pending/monthrecord"
 
 # Coze配置
-COZE_TOKEN = "pat_ABTxMqlmlUQewjT7SJXhfD5nvXsTHvOsPhjV9GVGU5bD6LgK4pwSuLnELdQrWg5a"
-COZE_BOT_ID = "7577689412885725236"
+COZE_TOKEN = ""
+COZE_BOT_ID = ""
 
 # 模板配置
 MONTH_PROMPT_TEMPLATE = """我的岗位是{job}，请基于{month}的所有实习周报内容，总结生成该月的实习月报总结，要求如下：
-1. 内容需全面概括当月的工作成果、任务完成情况、遇到的问题及改进方向；
-2. 语言专业规范，逻辑清晰，禁止模板化，体现灵活性，纯文本无特殊符号，标点符号，字数50-150；
-3. 仅输出月报内容本身，禁止添加任何额外字段、JSON片段、注释、详细年月日时间、项目名称、具体事项业务等内容；
-5. 禁止生成null、{{}}、[]等空值或符号，确保内容为纯自然语言文本；
-
-当月周报内容：
-{weekly_content}"""
+"""
 
 # 默认User-Agent
-DEFAULT_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'
+DEFAULT_USER_AGENT = ''
 
 # 初始化Session
 session = requests.Session()
@@ -189,10 +183,10 @@ def get_distribution_id():
             res_json = res.json()
             if res_json.get('code') == 200 and res_json.get('rows'):
                 # 尝试从月报记录中获取
-                return res_json['rows'][0].get('distributionId', 70447)
-        return 70447
+                return res_json['rows'][0].get('distributionId')
+        return
     except:
-        return 70447
+        return 
 
 
 def check_month_exist(month_str):
@@ -472,4 +466,5 @@ if __name__ == '__main__':
             "failed": 0,
             "skipped_months": []
         }
+
         print(json.dumps(final_result, ensure_ascii=False))

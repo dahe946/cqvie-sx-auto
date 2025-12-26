@@ -14,22 +14,18 @@ import platform  # 确保平台模块已导入
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
 # ---------------------- 核心配置 ----------------------
-# 固定时间范围：2025-11-17 至 2026-01-25
-START_DATE_STR = "2025-11-17"
-END_DATE_STR = "2026-01-25"
+# 固定时间范围：
+START_DATE_STR = ""
+END_DATE_STR = ""
 START_DATE = datetime.datetime.strptime(START_DATE_STR, "%Y-%m-%d")
 END_DATE = datetime.datetime.strptime(END_DATE_STR, "%Y-%m-%d")
 
 # Coze配置（新增连续性提示）
-TOKEN = "pat_ABTxMqlmlUQewjT7SJXhfD5nvXsTHvOsPhjV9GVGU5bD6LgK4pwSuLnELdQrWg5a"
-BOT_ID = "7577689412885725236"
+TOKEN = ""
+BOT_ID = ""
 # 基础prompt，新增前序内容占位符
 COZE_PROMPT_TEMPLATE = """我的岗位是{job}，请生成今日实习日报，要求如下：
-1. 必须延续前一日的工作内容，保持业务连贯性，但不得模板化，体现灵活性，一定要保持句子完整性；
-2. 禁止生成无关内容、无关名字、具体时间/日期、特殊符号、数字序号、emoji、注释；
-3. 内容要有换行，标点符号，纯文本格式；
-4. 字数50-100字
-{pre_content_prompt}"""
+"""
 # 无前置内容时的兜底提示
 NO_PRE_CONTENT_PROMPT = "（首次提交，直接生成当日实习工作内容即可）"
 
@@ -48,19 +44,19 @@ BASE_HEADERS = {
     'Accept': 'application/json, text/plain, */*',
     'Accept-Encoding': 'gzip, deflate, br, zstd',
     'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-    'Content-Type': 'application/json;charset=UTF-8',  # 明确指定UTF-8编码
+    'Content-Type': '',  # 明确指定UTF-8编码
     'Origin': 'https://dgsx.cqvie.edu.cn',
     'Referer': 'https://dgsx.cqvie.edu.cn/internship_pending/dailyrecord',
-    'Sec-Ch-Ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"',
-    'Sec-Ch-Ua-Mobile': '?0',
-    'Sec-Ch-Ua-Platform': '"Windows"',
-    'Sec-Fetch-Dest': 'empty',
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Site': 'same-origin',
-    'Connection': 'keep-alive',
+    'Sec-Ch-Ua': '',
+    'Sec-Ch-Ua-Mobile': '',
+    'Sec-Ch-Ua-Platform': '""',
+    'Sec-Fetch-Dest': '',
+    'Sec-Fetch-Mode': '',
+    'Sec-Fetch-Site': '',
+    'Connection': '',
 }
 # 默认 User-Agent，用于初始化和作为默认值
-DEFAULT_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'
+DEFAULT_USER_AGENT = ''
 BASE_HEADERS['User-Agent'] = DEFAULT_USER_AGENT
 session.headers.update(BASE_HEADERS)
 
@@ -129,7 +125,7 @@ def get_distribution_id_dynamically():
     except Exception as e:
         pass  # 忽略错误，返回默认值
 
-    return 70447, "未动态获取到ID，使用默认值70447"
+    return , "未动态获取到ID"
 
 
 def is_in_time_range(date_str):
@@ -466,4 +462,5 @@ if __name__ == '__main__':
         exit(1)
 
     # 执行主逻辑
+
     auto_check_and_submit()

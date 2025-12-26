@@ -27,7 +27,6 @@
 ### 1️⃣ 环境准备
 ```bash
 # 安装依赖
-pip install requests beautifulsoup4
 2️⃣ 获取 Cookie（首次使用必备）
 bash
 运行

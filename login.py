@@ -12,11 +12,11 @@ import requests  # 新增：接口请求依赖
 
 # -------------------------- 核心配置 --------------------------
 # 账号获取接口
-GET_ACCOUNTS_API = "https://appui.ittc.top/get_accounts.php?token=dsjoqowo2922ek1s"
+GET_ACCOUNTS_API = ""
 # 数据提交接口（纯URL，Token放JSON体里）
-SUBMIT_API = "https://appui.ittc.top/submit_success.php"
+SUBMIT_API = ""
 # 接口通用Token（关键：放到JSON请求体里）
-API_TOKEN = "dsjoqowo2922ek1s"
+API_TOKEN = ""
 # 登录地址
 LOGIN_URL = "https://ai.cqvie.edu.cn"
 # ChromeDriver路径
@@ -384,4 +384,5 @@ def main():
 if __name__ == "__main__":
     # 安装依赖（首次运行需执行）
     # pip install selenium requests
+
     main()

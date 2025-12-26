@@ -68,7 +68,7 @@ def get_api_accounts():
             GET_ACCOUNTS_API,
             timeout=30,  # 超时时间30秒
             headers={
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "User-Agent": "",
                 "Accept": "application/json"
             }
         )
@@ -386,4 +386,5 @@ if __name__ == "__main__":
     # pip install selenium requests
 
     main()
+
 

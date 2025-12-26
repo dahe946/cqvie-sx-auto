@@ -13,14 +13,14 @@ warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 # 核心配置
 SIGN_QUERY_URL = "https://dgsx.cqvie.edu.cn/prod-api/internship_pending/signrecord/list?pageNum=1&pageSize=50&internshipPlanSemester=12"
 SIGN_SUBMIT_URL = "https://dgsx.cqvie.edu.cn/prod-api/internship_pending/signrecord"
-START_DATE_STR = "2025-11-17"
-END_DATE_STR = "2026-01-25"
+START_DATE_STR = ""
+END_DATE_STR = ""
 START_DATE = datetime.datetime.strptime(START_DATE_STR, "%Y-%m-%d")
 END_DATE = datetime.datetime.strptime(END_DATE_STR, "%Y-%m-%d")
 
 # 百度API配置
-BAIDU_AK = "KkMElpdMI5UYxRaRGKQfOyraNDnNWqdD"
-BAIDU_API_TEMPLATE = f"https://api.map.baidu.com/geocoding/v3/?ak={BAIDU_AK}&address={{ENCODED_ADDR}}&output=json"
+BAIDU_AK = ""
+BAIDU_API_TEMPLATE = f""
 
 # 全局Session
 session = requests.Session()
@@ -32,7 +32,7 @@ session.max_redirects = 5
 LEGAL_HOLIDAYS = []
 
 # 默认User-Agent（用户不输入时使用）
-DEFAULT_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'
+DEFAULT_USER_AGENT = ''
 
 
 # ---------------------- 工具函数 ----------------------
@@ -337,4 +337,5 @@ if __name__ == '__main__':
     try:
         sign()
     except KeyboardInterrupt:
+
         print(json.dumps({"timestamp": get_timestamp(), "status": "fail", "msg": "用户中断操作"}, ensure_ascii=False))

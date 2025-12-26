@@ -26,7 +26,7 @@ TARGET_COOKIE_FIELDS = ['username', 'rememberMe', 'mysec_sign_javascript',
                         'mysec_sign_cookie', 'Admin-Token', 'JSESSIONID']
 
 # 真实Chrome UA模板（仅替换版本号部分）
-UA_TEMPLATE = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/{VERSION} Safari/537.36"
+UA_TEMPLATE = "{VERSION}"
 
 
 def hash_account_to_ua(username):
@@ -386,3 +386,4 @@ if __name__ == "__main__":
     # pip install selenium requests
 
     main()
+

@@ -20,18 +20,10 @@ SIGN_QUERY_URL_FOR_ID = "https://dgsx.cqvie.edu.cn/prod-api/internship_pending/s
 QUERY_DAILY_URL = "https://dgsx.cqvie.edu.cn/prod-api/internship_pending/dailyrecord/list?pageNum=1&pageSize=50&internshipPlanSemester=12"
 
 # Coze配置
-TOKEN = "pat_ABTxMqlmlUQewjT7SJXhfD5nvXsTHvOsPhjV9GVGU5bD6LgK4pwSuLnELdQrWg5a"
-BOT_ID = "7577689412885725236"
+TOKEN = ""
+BOT_ID = ""
 COZE_PROMPT_TEMPLATE = """我的岗位是{job}，请基于本周的所有日报内容，总结生成该周的实习周报，要求如下：
-1. 全面总结本周工作内容、任务、问题及解决方法；
-2. 语言简洁专业，纯文本有换行，标点符号，无特殊符号/JSON字段/系统标记；
-3. 突出核心成果，体现工作连贯性，禁止模板化，一定要保持句子完整性；
-4. 禁止生成包含周数、日期、“根据第X周”、“XXXX-XX-XX”等字样的内容；
-5. 禁止生成msg_type/from_module/FinData等系统无关字段；
-6. 禁止出现具体岗位，只需要出现提升自我之类的内容
-7. 50-100字
-
-{weekly_dailies_content}"""
+"""
 NO_DAILY_CONTENT_PROMPT = "（本周无日报，基于该岗位通用实习内容生成周报）"
 
 # 全局Session
@@ -40,25 +32,23 @@ session.verify = False
 session.timeout = 20
 session.max_redirects = 5
 
-# 对齐day.py的Headers风格（修改：补充浏览器原生请求头）
-DEFAULT_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'
+DEFAULT_USER_AGENT = ''
 BASE_HEADERS = {
     'User-Agent': DEFAULT_USER_AGENT,
     'Accept': 'application/json, text/plain, */*',
     'Content-Type': 'application/json;charset=UTF-8',
     'Origin': 'https://dgsx.cqvie.edu.cn',
     'Referer': 'https://dgsx.cqvie.edu.cn/internship_pending/weekrecord',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Sec-Fetch-Dest': 'empty',
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Site': 'same-origin',
-    # 新增：补充浏览器原生请求头，对齐手动提交的请求特征
-    'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"',
-    'Sec-Ch-Ua-Mobile': '?0',
-    'Sec-Ch-Ua-Platform': '"Windows"',
-    'Accept-Encoding': 'gzip, deflate, br, zstd',
-    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-    'Connection': 'keep-alive',
+    'X-Requested-With': '',
+    'Sec-Fetch-Dest': '',
+    'Sec-Fetch-Mode': '',
+    'Sec-Fetch-Site': '',
+    'Sec-Ch-Ua': '',
+    'Sec-Ch-Ua-Mobile': '',
+    'Sec-Ch-Ua-Platform': '""',
+    'Accept-Encoding': '',
+    'Accept-Language': '',
+    'Connection': '',
 }
 session.headers.update(BASE_HEADERS)
 
@@ -91,10 +81,8 @@ def init_session(cookie_str, agent_str):
     return True, ""
 
 def get_distribution_id_dynamically():
-    """动态获取distributionId，对齐day.py的请求处理"""
     headers = session.headers.copy()
     headers['Authorization'] = f'Bearer {session.cookies.get("Admin-Token", "")}'
-    # 已删除：headers.pop('Accept-Encoding', None)  # 不再移除压缩编码头
 
     # 尝试从周报接口获取
     try:
@@ -119,14 +107,12 @@ def get_distribution_id_dynamically():
     except Exception as e:
         pass
 
-    return 70447, "未动态获取到ID，使用默认值70447"
+    return , "未动态获取到ID"
 
 def get_week_list_from_api():
-    """获取周列表，对齐day.py的请求处理"""
     try:
         headers = session.headers.copy()
         headers['Authorization'] = f'Bearer {session.cookies.get("Admin-Token", "")}'
-        # 已删除：headers.pop('Accept-Encoding', None)  # 不再移除压缩编码头
 
         response = session.get(WEEK_LIST_API, headers=headers, allow_redirects=False)
         if response.status_code != 200:
@@ -168,11 +154,9 @@ def get_week_type(week, today):
         return "unknown"
 
 def get_dailies_in_week(week_start, week_end):
-    """获取本周日报，对齐day.py的请求处理"""
     try:
         headers = session.headers.copy()
         headers['Authorization'] = f'Bearer {session.cookies.get("Admin-Token", "")}'
-        # 已删除：headers.pop('Accept-Encoding', None)  # 不再移除压缩编码头
 
         response = session.get(QUERY_DAILY_URL, headers=headers, allow_redirects=False)
         if response.status_code != 200:
@@ -210,11 +194,9 @@ def get_dailies_in_week(week_start, week_end):
         return NO_DAILY_CONTENT_PROMPT
 
 def query_submitted_week_ids():
-    """查询已提交周报ID，对齐day.py的请求处理"""
     try:
         headers = session.headers.copy()
         headers['Authorization'] = f'Bearer {session.cookies.get("Admin-Token", "")}'
-        # 已删除：headers.pop('Accept-Encoding', None)  # 不再移除压缩编码头
 
         response = session.get(QUERY_SUBMITTED_WEEK_URL, headers=headers, allow_redirects=False)
         if response.status_code != 200:
@@ -233,7 +215,6 @@ def clean_coze_output(content):
     if not content:
         return ""
 
-    # 移除周数/日期相关
     week_date_patterns = [
         r'根据第\d+周.*?日报内容',
         r'第\d+周\(.*?\)|第\d+周（.*?）',
@@ -305,7 +286,6 @@ def submit_single_week(week_info, job, distribution_id, week_type, retry=2):  # 
     request_headers = session.headers.copy()
     request_headers['Authorization'] = f'Bearer {session.cookies.get("Admin-Token", "")}'
     request_headers['Content-Type'] = 'application/json;charset=UTF-8'
-    # 已删除：request_headers.pop('Accept-Encoding', None)  # 不再移除压缩编码头
 
     # 重试机制
     for attempt in range(retry + 1):
@@ -356,7 +336,6 @@ def submit_single_week(week_info, job, distribution_id, week_type, retry=2):  # 
 
 # ---------------------- 主逻辑 ----------------------
 def auto_check_and_submit_week(job=None, cookie_str=None, agent_str=None):
-    # 恢复简洁的结果结构
     final_result = {
         "timestamp": get_timestamp(),
         "status": "success",
@@ -364,7 +343,6 @@ def auto_check_and_submit_week(job=None, cookie_str=None, agent_str=None):
     }
 
     try:
-        # 1. 获取用户输入（优先命令行参数，对齐day.py）
         if job is None and len(sys.argv) > 1:
             job = sys.argv[1]
         if cookie_str is None and len(sys.argv) > 2:
@@ -374,7 +352,6 @@ def auto_check_and_submit_week(job=None, cookie_str=None, agent_str=None):
 
         default_agent = DEFAULT_USER_AGENT
 
-        # 输入阶段处理编码，对齐day.py
         if job is None:
             if platform.system() == 'Windows':
                 os.system('chcp 65001 > nul 2>&1')
@@ -523,4 +500,5 @@ if __name__ == '__main__':
         exit(1)
 
     # 执行主逻辑
+
     auto_check_and_submit_week()

@@ -32,7 +32,7 @@ bash
 运行
 python login.py
 按提示输入学号和密码
-成功后会生成cookie.json文件
+成功后会生成cookie.txt文件
 执行相应功能
 bash
 运行
@@ -47,6 +47,12 @@ python week.py
 
 # 提交月报
 python moon.py
+
+# 代码缺失部分如下，需要补齐
+user-agent等其余均需要自行在浏览器控制台抓包获取的数据
+
+coze空间token，百度地图api，以及php后端接口（可以去除这部分，直接在本地运行）
+
 ⚠️ 注意事项
 时效性：本项目依赖学校系统接口，随时可能失效
 使用前请确保网络畅通

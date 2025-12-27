@@ -22,7 +22,7 @@
 ├── moon.py # 月报提交
 
 └── login.py # Cookie 获取
-```bash
+```
 
 ## 🚀 使用指南
 

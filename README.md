@@ -3,7 +3,7 @@
 **CQVIE-重庆工程职业技术学院实习小助手**（签到、打卡、周报、日报、月报自动提交工具）
 
 **体验地址：https://www.yuque.com/masercontent/ffiu0g/wcsmgf1hvxxefycr?singleDoc#%20%E3%80%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%8B**
-[链接显示文本]([https://www.example.com](https://www.yuque.com/masercontent/ffiu0g/wcsmgf1hvxxefycr?singleDoc#%20%E3%80%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%8B) "可选：鼠标悬停时显示的简短提示文本")
+[链接显示文本]([https://www.example.com](https://www.yuque.com/masercontent/ffiu0g/wcsmgf1hvxxefycr?singleDoc#%20%E3%80%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%8B)")
 
 ## 🔔 重要声明
 **本项目仅用于学习交流，严禁任何商业目的和违法行为**。使用后请于**24小时内删除**，造成的一切后果与开发者无关。

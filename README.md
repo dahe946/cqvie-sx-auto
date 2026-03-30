@@ -1,5 +1,7 @@
 # CQVIE-SX-AUTO
 
+**签到项目原作者：https://github.com/im-xMorn/Cqvie-sx_auto_dk**
+
 **CQVIE-重庆工程职业技术学院实习小助手**（签到、打卡、周报、日报、月报自动提交工具）
 
 **体验地址：[https://www.yuque.com/masercontent/ffiu0g/wcsmgf1hvxxefycr?singleDoc#%20%E3%80%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%8B](https://www.yuque.com/masercontent-zt7ln/lnv6ne/vikf8kg0da7wszfw)**
